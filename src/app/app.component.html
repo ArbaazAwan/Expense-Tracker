@@ -1,16 +1,22 @@
-<div [formGroup]="form">
-  <div formArrayName="expenses" *ngFor="let expense of expenses().controls; let i = index;" class="mt-4">
-    <div [formGroupName]="i">
-      <ng-container class="row">
-        <input formControlName="description" placeholder="Enter Description">
-        <input formControlName="entryDate" placeholder="Enter Entry Date" type="date">
-        <input formControlName="entryAmount" placeholder="Enter Entry Amount" type="number">
-        <input formControlName="tags" placeholder="Enter Tags">
-      </ng-container>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div [formGroup]="form">
+        <div formArrayName="expenses" *ngFor="let expense of expenses().controls; let i = index;" class="mt-4">
+          <div [formGroupName]="i">
+            <input formControlName="description" class="col-md-3" placeholder="Enter Description">
+            <input formControlName="entryDate" class="col-md-3" placeholder="Enter Entry Date" type="date">
+            <input formControlName="entryAmount" class="col-md-3" placeholder="Enter Entry Amount" type="number">
+            <input formControlName="tags" class="col-md-3" placeholder="Enter Tags">
+          </div>
+          <button class="btn btn-danger" (click)="removeExpense(i)">Remove Expense</button>
+          <!-- Chosen name: {{ form.controls.expenses.controls[i].controls.name.value }} -->
+        </div>
+        <button class="btn btn-primary mt-2" (click)="addExpense()">Add</button>
+      </div>
     </div>
-    <button class="btn btn-danger" (click)="removeExpense(i)">Remove Expense</button>
-    <!-- Chosen name: {{ form.controls.expenses.controls[i].controls.name.value }} -->
+    <div class="col-6">
+      <button class="btn btn-success mt-2" (click)="onSubmit()">Submit</button>
+    </div>
   </div>
-  <button class="btn btn-primary mt-2" (click)="addExpense()">Add</button>
 </div>
-<button class="btn btn-success mt-2"(click)="onSubmit()">Submit</button>
