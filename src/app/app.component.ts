@@ -9,14 +9,12 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 export class AppComponent {
   form!: FormGroup;
   // expenses!: FormArray;
+  expensesArray:any[] = [];
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      expenses: new FormArray([])
-    });
-    this.addExpense();
+    this.resetForm();
   }
 
   newExpense() {
@@ -26,6 +24,14 @@ export class AppComponent {
       entryAmount:null,
       tags:null
     });
+  }
+
+  resetForm(){
+    this.form = new FormGroup({
+      expenses: new FormArray([])
+    });
+    this.expenses().clear();
+    this.addExpense();
   }
 
   addExpense() {
@@ -38,5 +44,11 @@ export class AppComponent {
 
   expenses(): FormArray {
     return this.form.get('expenses') as FormArray;
+  }
+
+  onSubmit(){
+    this.expensesArray.push(this.expenses().value[0]);
+    console.log('expenses are', this.expensesArray);
+    this.resetForm();
   }
 }

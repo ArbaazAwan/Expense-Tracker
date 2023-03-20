@@ -1,16 +1,19 @@
 <div [formGroup]="form">
   <div formArrayName="expenses" *ngFor="let expense of expenses().controls; let i = index;" class="mt-4">
     <div [formGroupName]="i">
-      <input formControlName="description" placeholder="Enter Description">
-      <input formControlName="entryDate" placeholder="Enter Entry Date" type="date">
-      <input formControlName="entryAmount" placeholder="Enter Entry Amount" type="number">
-      <input formControlName="tags" placeholder="Enter Tags">
+      <ng-container class="row">
+        <input formControlName="description" placeholder="Enter Description">
+        <input formControlName="entryDate" placeholder="Enter Entry Date" type="date">
+        <input formControlName="entryAmount" placeholder="Enter Entry Amount" type="number">
+        <input formControlName="tags" placeholder="Enter Tags">
+      </ng-container>
     </div>
     <button class="btn btn-danger" (click)="removeExpense(i)">Remove Expense</button>
     <!-- Chosen name: {{ form.controls.expenses.controls[i].controls.name.value }} -->
   </div>
   <button class="btn btn-primary mt-2" (click)="addExpense()">Add</button>
 </div>
+<button class="btn btn-success mt-2"(click)="onSubmit()">Submit</button>
 
 <table class="table table-bordered">
   <thead>
